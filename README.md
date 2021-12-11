@@ -1,6 +1,6 @@
 # jasima Standalone Project Template
 
-This project is a Java project to get started with [jasima](https://github.com/jasima-simulator/jasima-simcore), the Java Simulator for Manufacturing and Logistics. It contains a binary version of jasima and its depedencies in the `lib` folder. 
+This project is a Java project to get started with [jasima](https://github.com/jasima-simulator/jasima-simcore), the Java Simulator for Manufacturing and Logistics. It contains a binary version of jasima and its depedencies in the `lib` folder (currently: SNAPSHOT version from 2021-12-11). 
 
 It is intended to provide self-contained examples of core concept. For more advanced usage scenarios you probably want to check out the actual jasima repository and make use of Java build tools like [Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/) to manage dependencies.
 
@@ -24,7 +24,7 @@ When everything worked as expected you should be able to run the `HelloWorld` ex
 	fastClock() executed at: 18.0
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please use the jasima issue tracker at [GitHub](https://github.com/jasima-simulator/jasima-simcore/issues). 
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please use the jasima issue tracker at [GitHub](https://github.com/jasima-simulator/jasima-simcore/issues) for this. 
 
 Please consider adding tests as appropriate.
 
