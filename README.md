@@ -8,7 +8,7 @@ It is intended to provide self-contained examples of core concept. For more adva
 
 This project contains a self-contained Java project created with the Java IDE [Eclipse](https://www.eclipse.org/downloads/). To use it, check it out from GitHub and import it as a Java project into Eclipse (this should actually work with any Java IDE).
 
-When everything worked as expected you should be able to run the `HelloWorld` example contained in `src/examples/HelloWorld.java` producing the following output on the console:
+When everything worked as expected you should be able to run the `HelloWorld` example contained in `src/examples/simulation/HelloWorld.java` producing the following output on the console:
 
 	simulation main process started at: 0.0
 	slowClock() starting at: 0.0

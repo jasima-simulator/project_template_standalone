@@ -1,4 +1,4 @@
-package examples;
+package examples.simulation;
 
 import static jasima.core.simulation.SimContext.*;
 
