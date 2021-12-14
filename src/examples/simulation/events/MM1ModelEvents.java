@@ -24,12 +24,12 @@ public class MM1ModelEvents extends SimComponentBase {
 		Simulation sim = new Simulation();
 		sim.setPrintLevel(MsgCategory.ALL);
 		sim.addPrintListener(System.out::println);
-	
+
 		MM1ModelEvents mainComponent = new MM1ModelEvents();
 		sim.addComponent(mainComponent);
-		
+
 		Map<String, Object> res = sim.performRun();
-		
+
 		ConsolePrinter.printResults(null, res);
 	}
 
@@ -61,7 +61,7 @@ public class MM1ModelEvents extends SimComponentBase {
 	}
 
 	void createNext() {
-		int n = numCreated++;
+		Integer n = numCreated++;
 		if (!q.tryPut(n)) {
 			throw new IllegalStateException("can't put in queue?");
 		}
