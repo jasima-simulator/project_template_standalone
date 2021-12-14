@@ -1,6 +1,6 @@
 # jasima Standalone Project Template
 
-This project is a Java project to get started with [jasima](https://github.com/jasima-simulator/jasima-simcore), the Java Simulator for Manufacturing and Logistics. It contains a binary version of jasima and its depedencies in the `lib` folder (currently: SNAPSHOT version from 2021-12-11). 
+This project is a Java project to get started with [jasima](https://github.com/jasima-simulator/jasima-simcore), the Java Simulator for Manufacturing and Logistics. It contains a binary version of jasima and its depedencies in the `lib` folder (currently: SNAPSHOT version from 2021-12-13). 
 
 It is intended to provide self-contained examples of core concept. For more advanced usage scenarios you probably want to check out the actual jasima repository and make use of Java build tools like [Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/) to manage dependencies.
 
