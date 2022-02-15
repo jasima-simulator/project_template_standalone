@@ -34,7 +34,7 @@ public class RunCustomExperimentComplex {
 		ffe.addListener(new ExcelSaver("monteCarlo"));
 		
 		// run experiment, show results on the console
-		ConsoleRunner.runWithArgs(ffe);
+		ConsoleRunner.run(ffe);
 	}
 
 }

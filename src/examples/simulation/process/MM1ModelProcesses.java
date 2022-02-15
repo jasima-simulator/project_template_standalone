@@ -25,7 +25,7 @@ public class MM1ModelProcesses extends SimEntity {
 
 	public static void main(String... args) {
 		Map<String, Object> res = Simulation.of(new MM1ModelProcesses());
-		ConsolePrinter.printResults(null, res);
+		ConsolePrinter.printResults(res);
 	}
 
 	class Server extends SimEntity {

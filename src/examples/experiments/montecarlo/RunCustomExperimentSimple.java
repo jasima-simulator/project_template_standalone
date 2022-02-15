@@ -23,7 +23,7 @@ public class RunCustomExperimentSimple {
 		ce.setNumTrials(1000);
 
 		// run experiment, show results on the console
-		ConsoleRunner.runWithArgs(ce);
+		ConsoleRunner.run(ce);
 	}
 
 }

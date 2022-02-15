@@ -30,7 +30,7 @@ public class MM1ModelEvents extends SimComponentBase {
 
 		Map<String, Object> res = sim.performRun();
 
-		ConsolePrinter.printResults(null, res);
+		ConsolePrinter.printResults(res);
 	}
 
 	private static final double INTER_ARRIVAL_TIME = 1.0;
