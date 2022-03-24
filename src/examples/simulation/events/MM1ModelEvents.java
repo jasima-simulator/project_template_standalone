@@ -49,15 +49,13 @@ public class MM1ModelEvents extends SimComponentBase {
 
 	@Override
 	public void init() {
-		super.init();
-
 		q = new Q<>();
 
 		iats = initRndGen(new DblExp(INTER_ARRIVAL_TIME), "arrivals");
 		serviceTimes = initRndGen(new DblExp(INTER_ARRIVAL_TIME * trafficIntensity), "services");
 
 		// schedule first arrival
-		scheduleIn(iats.nextDbl(), getSim().currentPrio(), this::createNext);
+		scheduleIn(iats.nextDbl(), this::createNext);
 	}
 
 	void createNext() {
@@ -68,7 +66,8 @@ public class MM1ModelEvents extends SimComponentBase {
 		trace("created job", n);
 		checkStartService();
 		if (numCreated < numJobs) {
-			scheduleIn(iats.nextDbl(), getSim().currentPrio(), this::createNext);
+			// schedule next arrival
+			scheduleIn(iats.nextDbl(), this::createNext);
 		} else {
 			end();
 		}
@@ -80,7 +79,7 @@ public class MM1ModelEvents extends SimComponentBase {
 		}
 		currentJob = requireNonNull(q.tryTake());
 		trace("procStarted", currentJob);
-		scheduleIn(serviceTimes.nextDbl(), getSim().currentPrio(), this::finishedService);
+		scheduleIn(serviceTimes.nextDbl(), this::finishedService);
 	}
 
 	void finishedService() {
@@ -92,7 +91,6 @@ public class MM1ModelEvents extends SimComponentBase {
 
 	@Override
 	public void produceResults(Map<String, Object> res) {
-		super.produceResults(res);
 		res.put("numCreated", numCreated);
 		res.put("numServed", numServed);
 	}
