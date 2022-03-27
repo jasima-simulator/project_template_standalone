@@ -11,7 +11,6 @@ import jasima.core.simulation.SimProcess.MightBlock;
 import jasima.core.simulation.Simulation;
 import jasima.core.simulation.generic.Q;
 import jasima.core.util.ConsolePrinter;
-import jasima.core.util.MsgCategory;
 
 /**
  * Process-oriented modelling of a single server queue with exponentially
@@ -40,17 +39,16 @@ public class MM1ModelProcesses extends SimEntity {
 			// endless processing loop
 			while (true) {
 				Integer job = q.take();
-				trace("procStarted", job);
+				System.out.println("start processing job " + job + " at time=" + simTime());
 				double st = serviceTimes.nextDbl();
 				waitFor(st);
 				numServed++;
-				trace("procFinished", job);
+				System.out.println("finished processing job " + job + " at time=" + simTime());
 			}
 		}
 
 		@Override
 		public void produceResults(Map<String, Object> res) {
-			super.produceResults(res);
 			res.put("numServed", numServed);
 		}
 	}
@@ -61,14 +59,12 @@ public class MM1ModelProcesses extends SimEntity {
 
 	// fields used during run
 	int numCreated;
-	Q<Integer> q = new Q<>();
+	Q<Integer> q;
 
 	@Override
 	protected void lifecycle() throws MightBlock {
-		getSim().setPrintLevel(MsgCategory.ALL);
-		getSim().addPrintListener(System.out::println);
-
 		// init
+		q = new Q<>();
 		addComponent(new Server());
 		numCreated = 0;
 		DblSequence iats = initRndGen(new DblExp(INTER_ARRIVAL_TIME), "arrivals");
@@ -76,7 +72,7 @@ public class MM1ModelProcesses extends SimEntity {
 		// creation of jobs
 		for (int n = 0; n < numJobs; n++) {
 			waitFor(iats.nextDbl());
-			trace("created job", n);
+			System.out.println("created job " + n + " at time=" + simTime());
 			q.put(n);
 			numCreated++;
 		}
@@ -87,7 +83,6 @@ public class MM1ModelProcesses extends SimEntity {
 
 	@Override
 	public void produceResults(Map<String, Object> res) {
-		super.produceResults(res);
 		res.put("numCreated", numCreated);
 	}
 

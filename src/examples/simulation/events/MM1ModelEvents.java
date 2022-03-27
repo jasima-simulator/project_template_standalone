@@ -1,7 +1,5 @@
 package examples.simulation.events;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Map;
 
 import jasima.core.random.continuous.DblExp;
@@ -10,7 +8,6 @@ import jasima.core.simulation.SimComponentBase;
 import jasima.core.simulation.Simulation;
 import jasima.core.simulation.generic.Q;
 import jasima.core.util.ConsolePrinter;
-import jasima.core.util.MsgCategory;
 
 /**
  * Event-oriented modelling of a single server queue with exponentially
@@ -21,15 +18,16 @@ import jasima.core.util.MsgCategory;
 public class MM1ModelEvents extends SimComponentBase {
 
 	public static void main(String... args) {
+		// create and parameterize simulation
 		Simulation sim = new Simulation();
-		sim.setPrintLevel(MsgCategory.ALL);
-		sim.addPrintListener(System.out::println);
 
 		MM1ModelEvents mainComponent = new MM1ModelEvents();
 		sim.addComponent(mainComponent);
 
+		// run simulation
 		Map<String, Object> res = sim.performRun();
 
+		// show results on console
 		ConsolePrinter.printResults(res);
 	}
 
@@ -39,18 +37,20 @@ public class MM1ModelEvents extends SimComponentBase {
 	private int numJobs = 1000;
 	private double trafficIntensity = 0.85;
 
-	// fields used during run
-	private Q<Integer> q;
-	private DblSequence iats;
-	private DblSequence serviceTimes;
-	private Integer currentJob;
-	private int numServed = 0;
-	private int numCreated = 0;
+	// fields used during simulation run
+	private Q<Integer> q; // queue for waiting jobs
+	private DblSequence iats; // inter-arrival times
+	private DblSequence serviceTimes; // service times
+	private Integer currentJob; // job currently processed by the server
+	private int numServed = 0; // counter for number of serviced jobs
+	private int numCreated = 0; // counter for total number of jobs created
 
 	@Override
 	public void init() {
+		// create new queue
 		q = new Q<>();
 
+		// initialize random number streams/sequences
 		iats = initRndGen(new DblExp(INTER_ARRIVAL_TIME), "arrivals");
 		serviceTimes = initRndGen(new DblExp(INTER_ARRIVAL_TIME * trafficIntensity), "services");
 
@@ -60,13 +60,14 @@ public class MM1ModelEvents extends SimComponentBase {
 
 	void createNext() {
 		Integer n = numCreated++;
-		if (!q.tryPut(n)) {
-			throw new IllegalStateException("can't put in queue?");
-		}
-		trace("created job", n);
+		q.tryPut(n);
+		
+		System.out.println("created job " + n + " at time=" + simTime());
+		
 		checkStartService();
+
+		// schedule next arrival or end simulation
 		if (numCreated < numJobs) {
-			// schedule next arrival
 			scheduleIn(iats.nextDbl(), this::createNext);
 		} else {
 			end();
@@ -75,17 +76,24 @@ public class MM1ModelEvents extends SimComponentBase {
 
 	void checkStartService() {
 		if (q.numItems() == 0 || currentJob != null) {
-			return; // nothing to do
+			// nothing to do because either "q" is empty or server is currently busy
+			return;
 		}
-		currentJob = requireNonNull(q.tryTake());
-		trace("procStarted", currentJob);
+
+		// take next job from queue
+		currentJob = q.tryTake();
+		System.out.println("start processing job " + currentJob + " at time=" + simTime());
+
+		// schedule service end event
 		scheduleIn(serviceTimes.nextDbl(), this::finishedService);
 	}
 
 	void finishedService() {
-		trace("procFinished", currentJob);
+		System.out.println("finished processing job " + currentJob + " at time=" + simTime());
 		currentJob = null;
 		numServed++;
+
+		// immediately check processing of next job
 		checkStartService();
 	}
 
