@@ -9,7 +9,7 @@ import org.junit.Test;
 import jasima.core.simulation.SimContext;
 
 /**
- * JUnit tests for basic behavior of {@link MM1ModelEvents}.
+ * JUnit test for basic behavior of {@link MM1ModelEvents}.
  */
 public class MM1ModelEventsTest {
 
