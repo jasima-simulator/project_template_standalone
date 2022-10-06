@@ -20,9 +20,9 @@
 	<classpathentry kind="lib" path="lib/lib/log4j-api-2.17.2.jar"/>
 	<classpathentry kind="lib" path="lib/lib/log4j-core-2.17.2.jar"/>
 	<classpathentry kind="lib" path="lib/lib/xstream-1.4.19.jar"/>
-	<classpathentry kind="lib" path="lib/jasima-main-3.0.0-RC3-SNAPSHOT.jar" sourcepath="lib/jasima-main-3.0.0-RC3-SNAPSHOT-sources.jar">
+	<classpathentry kind="lib" path="lib/jasima-main-3.0.0-RC3.jar" sourcepath="lib/jasima-main-3.0.0-RC3-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/project_template_standalone/lib/jasima-main-3.0.0-RC3-SNAPSHOT-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/project_template_standalone/lib/jasima-main-3.0.0-RC3-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
